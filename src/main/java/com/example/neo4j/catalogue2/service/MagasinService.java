@@ -16,4 +16,8 @@ public class MagasinService {
         }
         return -1;
     }
+
+    public MagasinService(MagasinRepository magasinRepository) {
+        this.magasinRepository = magasinRepository;
+    }
 }
