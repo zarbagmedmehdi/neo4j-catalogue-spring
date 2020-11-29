@@ -1,24 +1,25 @@
 package com.example.neo4j.catalogue2.bean;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 @NodeEntity
 public class Magasin {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
     private String nom;
     private String adresse;
     private String ville;
 
-//    @Relationship(type = "STOCKED_IN")
-//    private List<StockProduit> stockProduits=new ArrayList<>();
+    @Relationship(type = "STOCKED_IN",direction = Relationship.INCOMING)
+    private List<StockProduit> stockProduits=new ArrayList<>();
 
     public Magasin() {
     }
@@ -30,12 +31,24 @@ public class Magasin {
         this.ville = ville;
     }
 
+    public Magasin(Long id) {
+        this.id = id;
+    }
+
     public Magasin withId(Long id) {
         if (this.id.equals(id)) {
             return this;
         } else {
             return new Magasin(id, this.nom,this.adresse,this.ville);
         }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -62,11 +75,11 @@ public class Magasin {
         this.ville = ville;
     }
 
-//    public List<StockProduit> getStockProduits() {
-//        return stockProduits;
-//    }
-//
-//    public void setStockProduits(List<StockProduit> stockProduits) {
-//        this.stockProduits = stockProduits;
-//    }
+    public List<StockProduit> getStockProduits() {
+        return stockProduits;
+    }
+
+    public void setStockProduits(List<StockProduit> stockProduits) {
+        this.stockProduits = stockProduits;
+    }
 }

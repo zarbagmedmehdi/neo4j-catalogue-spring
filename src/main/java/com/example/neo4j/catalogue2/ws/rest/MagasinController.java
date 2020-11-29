@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class MagasinController {
     @Autowired
     public MagasinService magasinService;
+
     @PostMapping("/")
-    public int save(@RequestBody Magasin magasin){return magasinService.save(magasin);}
+    public int save(@RequestBody Magasin magasin) {
+        return magasinService.save(magasin);
+    }
 }

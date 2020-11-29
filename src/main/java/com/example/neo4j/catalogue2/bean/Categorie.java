@@ -1,22 +1,55 @@
 package com.example.neo4j.catalogue2.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
 
 import java.util.List;
 
-import static org.neo4j.ogm.annotation.Relationship.OUTGOING;
-
-//@NodeEntity
+@NodeEntity
 public class Categorie {
-//    @Id
-//    @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
     private String libelle;
 
-  // @Relationship(type = "IN_CATEGORY")
+    @Relationship(type = "IN_CATEGORY")
     private List<Produit> produits;
 
+    public Categorie() {}
+
+    public Categorie(Long id) {
+        this.id = id;
+    }
+
+    public Categorie(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    @JsonIgnore
+    public List<Produit> getProduits() {
+        return produits;
+    }
+
+    public void setProduits(List<Produit> produits) {
+        this.produits = produits;
+    }
 }

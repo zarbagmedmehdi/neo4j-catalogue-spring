@@ -1,14 +1,13 @@
 package com.example.neo4j.catalogue2.bean;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.neo4j.ogm.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static org.neo4j.ogm.annotation.Relationship.INCOMING;
 
 @NodeEntity
 public class Produit {
@@ -21,31 +20,36 @@ public class Produit {
     private String marque;
     private String image;
     private String description;
-    //private Map<String, String> caracteristiques;
+    @Properties
+    private Map<String, String> caracteristiques;
+    @JsonIgnore
+    @Relationship(type = "STOCKED_IN", direction = Relationship.INCOMING)
+    private List<StockProduit> stockProduits = new ArrayList<>();
+    @Relationship(type = "IN_CATEGORY", direction = Relationship.INCOMING)
+    private List<Categorie> categories;
+//    @Relationship(type = "HAS_REVIEW", direction = INCOMING)
+//    private List<Review> reviews;
+//    @Relationship(type = "ORDRED_IN", direction = INCOMING)
+//    private List<Commande> commandes;
+    //    @Relationship(type = "IN_MAGASIN", direction = INCOMING)
+//    private List<Magasin> magasins;
 
-//    @Relationship(type = "STOCKED_IN", direction = INCOMING)
-//    private List<StockProduit> stockProduits = new ArrayList<>();
-
+    public Produit() {
+    }
 
     public Produit(Long id) {
         this.id = id;
     }
 
-    public Produit withId(Long id) {
-        if (this.id.equals(id)) {
-            return this;
-        } else {
-            return new Produit(id);
-        }
+    public Produit(String reference, String libelle, Double prix, String marque, String image, String description) {
+
+        this.reference = reference;
+        this.libelle = libelle;
+        this.prix = prix;
+        this.marque = marque;
+        this.image = image;
+        this.description = description;
     }
-//    @Relationship(type = "IN_CATEGORY", direction = INCOMING)
-//    private List<Categorie> categories;
-//    @Relationship(type = "IN_MAGASIN", direction = INCOMING)
-//    private List<Magasin> magasins;
-//    @Relationship(type = "HAS_REVIEW", direction = INCOMING)
-//    private List<Review> reviews;
-//    @Relationship(type = "ORDRED_IN", direction = INCOMING)
-//    private List<Commande> commandes;
 
 
     public Long getId() {
@@ -102,5 +106,31 @@ public class Produit {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @JsonAnyGetter
+    public Map<String, String> getCaracteristiques() {
+        return caracteristiques;
+    }
+
+    @JsonAnySetter
+    public void setCaracteristiques(Map<String, String> caracteristiques) {
+        this.caracteristiques = caracteristiques;
+    }
+
+    public List<StockProduit> getStockProduits() {
+        return stockProduits;
+    }
+
+    public void setStockProduits(List<StockProduit> stockProduits) {
+        this.stockProduits = stockProduits;
+    }
+
+    public List<Categorie> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Categorie> categories) {
+        this.categories = categories;
     }
 }
