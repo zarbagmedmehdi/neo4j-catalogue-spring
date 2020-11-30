@@ -52,4 +52,12 @@ public class Categorie {
     public void setProduits(List<Produit> produits) {
         this.produits = produits;
     }
+
+    @Override
+    public String toString() {
+        return "Categorie{" +
+                "id=" + id +
+                ", libelle='" + libelle + '\'' +
+                '}';
+    }
 }

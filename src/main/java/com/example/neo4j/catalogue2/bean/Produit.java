@@ -133,4 +133,20 @@ public class Produit {
     public void setCategories(List<Categorie> categories) {
         this.categories = categories;
     }
+
+    @Override
+    public String toString() {
+        return "Produit{" +
+                "id=" + id +
+                ", reference='" + reference + '\'' +
+                ", libelle='" + libelle + '\'' +
+                ", prix=" + prix +
+                ", marque='" + marque + '\'' +
+                ", image='" + image + '\'' +
+                ", description='" + description + '\'' +
+                ", caracteristiques=" + caracteristiques +
+                ", stockProduits=" + stockProduits +
+                ", categories=" + categories +
+                '}';
+    }
 }

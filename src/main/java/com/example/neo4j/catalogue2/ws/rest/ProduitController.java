@@ -6,9 +6,6 @@ import com.example.neo4j.catalogue2.service.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 @RequestMapping("/produit")
 public class ProduitController {
@@ -17,7 +14,7 @@ public class ProduitController {
 
     @PostMapping("/")
     public int save(@RequestBody Produit produit) {
-        Map<String, Object> c1 = new HashMap<>();
+        System.out.println(produit);
         return produitService.save(produit);
     }
 
