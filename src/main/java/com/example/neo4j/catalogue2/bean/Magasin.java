@@ -82,4 +82,14 @@ public class Magasin {
     public void setStockProduits(List<StockProduit> stockProduits) {
         this.stockProduits = stockProduits;
     }
+
+    @Override
+    public String toString() {
+        return "Magasin{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", ville='" + ville + '\'' +
+                '}';
+    }
 }

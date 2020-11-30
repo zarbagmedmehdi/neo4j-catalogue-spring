@@ -10,9 +10,9 @@ public class StockProduit {
     private int stock;
 
     @StartNode
-    private Magasin magasin;
-    @EndNode
     private Produit produit;
+    @EndNode
+    private Magasin magasin;
 
     public StockProduit() {
     }

@@ -12,7 +12,8 @@ public class Review {
     private Long id;
     private int stars;
     private String comment;
-
+    @Relationship(type = "HAS_REVIEW",direction = Relationship.INCOMING)
+    private Produit produit;
     @Relationship(type = "WRITTEN_BY")
     private Client client;
 
@@ -55,5 +56,22 @@ public class Review {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public Produit getProduit() {
+        return produit;
+    }
+
+    public void setProduit(Produit produit) {
+        this.produit = produit;
+    }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", stars=" + stars +
+                ", comment='" + comment + '\'' +
+                '}';
     }
 }

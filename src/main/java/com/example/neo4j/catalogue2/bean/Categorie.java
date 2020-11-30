@@ -15,7 +15,7 @@ public class Categorie {
     private Long id;
     private String libelle;
 
-    @Relationship(type = "IN_CATEGORY")
+    @Relationship(type = "IN_CATEGORY",direction = Relationship.INCOMING)
     private List<Produit> produits;
 
     public Categorie() {}
@@ -60,4 +60,5 @@ public class Categorie {
                 ", libelle='" + libelle + '\'' +
                 '}';
     }
+
 }

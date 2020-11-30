@@ -23,16 +23,15 @@ public class Produit {
     @Properties
     private Map<String, String> caracteristiques;
     @JsonIgnore
-    @Relationship(type = "STOCKED_IN", direction = Relationship.INCOMING)
+    @Relationship(type = "STOCKED_IN")
     private List<StockProduit> stockProduits = new ArrayList<>();
-    @Relationship(type = "IN_CATEGORY", direction = Relationship.INCOMING)
+    @Relationship(type = "IN_CATEGORY")
     private List<Categorie> categories;
-//    @Relationship(type = "HAS_REVIEW", direction = INCOMING)
-//    private List<Review> reviews;
-//    @Relationship(type = "ORDRED_IN", direction = INCOMING)
-//    private List<Commande> commandes;
-    //    @Relationship(type = "IN_MAGASIN", direction = INCOMING)
-//    private List<Magasin> magasins;
+    @Relationship(type = "CONTAINS", direction = Relationship.INCOMING)
+    private List<CommandeItem> commandeItems;
+    @Relationship(type = "HAS_REVIEW")
+    private List<Review> reviews;
+
 
     public Produit() {
     }
@@ -132,6 +131,14 @@ public class Produit {
 
     public void setCategories(List<Categorie> categories) {
         this.categories = categories;
+    }
+
+    public List<CommandeItem> getCommandeItems() {
+        return commandeItems;
+    }
+
+    public void setCommandeItems(List<CommandeItem> commandeItems) {
+        this.commandeItems = commandeItems;
     }
 
     @Override
