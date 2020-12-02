@@ -16,7 +16,7 @@ public class Commande {
     private Long id;
     private String dateCommande;
 
-    @Relationship(type = "ORDERED_BY",direction = Relationship.INCOMING)
+    @Relationship(type = "ORDERS",direction = Relationship.INCOMING)
     private Client client;
     @Relationship(type = "CONTAINS")
     private List<CommandeItem> commandeItems;

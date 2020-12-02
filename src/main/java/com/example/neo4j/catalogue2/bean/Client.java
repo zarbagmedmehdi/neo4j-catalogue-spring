@@ -19,7 +19,7 @@ public class Client {
     private String numTel;
     private String adresse;
 
-    @Relationship(type = "ORDERED_BY")
+    @Relationship(type = "ORDERS")
     private List<Commande> commandes;
 
     public Client() {
