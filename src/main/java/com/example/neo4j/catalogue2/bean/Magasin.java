@@ -1,5 +1,6 @@
 package com.example.neo4j.catalogue2.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -75,6 +76,7 @@ public class Magasin {
         this.ville = ville;
     }
 
+    @JsonIgnore
     public List<StockProduit> getStockProduits() {
         return stockProduits;
     }
