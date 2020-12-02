@@ -27,7 +27,7 @@ public class ProduitController {
         return produitService.save(produit);
     }
 
-    @PostMapping("/{productId}/{stock}/magasin/{magasinId}")
+    @GetMapping("/{productId}/{stock}/magasin/{magasinId}")
     public int affectToMagasin(@PathVariable Long magasinId, @PathVariable Long productId, @PathVariable int stock) {
         Magasin magasin = new Magasin(magasinId);
         Produit produit = new Produit(productId);
