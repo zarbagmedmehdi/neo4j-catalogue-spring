@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MagasinRepository extends Neo4jRepository<Magasin,Long> {
-
 }

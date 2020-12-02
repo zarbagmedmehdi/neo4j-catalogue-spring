@@ -17,4 +17,9 @@ public class CategorieService {
         }
         return -1;
     }
+
+    //Mehdi Work
+    public Iterable<Categorie> findAll(){
+        return categorieRepository.findAll();
+    }
 }

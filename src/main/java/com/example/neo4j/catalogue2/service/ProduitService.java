@@ -2,11 +2,15 @@ package com.example.neo4j.catalogue2.service;
 
 import com.example.neo4j.catalogue2.bean.Magasin;
 import com.example.neo4j.catalogue2.bean.Produit;
+import com.example.neo4j.catalogue2.bean.SearchProduct;
 import com.example.neo4j.catalogue2.bean.StockProduit;
 import com.example.neo4j.catalogue2.dao.MagasinRepository;
 import com.example.neo4j.catalogue2.dao.ProduitRepository;
+import org.neo4j.driver.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProduitService {
@@ -14,6 +18,7 @@ public class ProduitService {
     ProduitRepository produitRepository;
     @Autowired
     MagasinRepository magasinRepository;
+    private  Session session;
 
     public int save(Produit produit){
         if (produit!=null){
@@ -44,5 +49,20 @@ public class ProduitService {
             System.out.println(stockProduit);
         }
         return produit;
+    }
+     //Mehdi
+    public List<String> findAllMarques() {
+        return produitRepository.findAllMarques();
+    }
+    ///
+    public Iterable<Produit> findByLibelle(String libelle) {
+        return produitRepository.findByLibelle(libelle);
+    }
+    public Iterable<Produit> findAll() {
+        return produitRepository.findAll();
+    }
+
+    public Iterable<Produit> fincCriteria(SearchProduct s){
+        return produitRepository.findCriteria(s.priceMin,s.priceMax,s.marques);
     }
 }

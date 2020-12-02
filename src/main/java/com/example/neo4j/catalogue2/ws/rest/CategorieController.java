@@ -1,12 +1,10 @@
 package com.example.neo4j.catalogue2.ws.rest;
 
 import com.example.neo4j.catalogue2.bean.Categorie;
+import com.example.neo4j.catalogue2.bean.Magasin;
 import com.example.neo4j.catalogue2.service.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/categorie")
@@ -18,4 +16,11 @@ public class CategorieController {
     public int save(@RequestBody Categorie categorie){
         return categorieService.save(categorie);
     }
+
+    //Mehdi work
+    @GetMapping("/")
+    public Iterable<Categorie> findAll() {
+        return categorieService.findAll();
+    }
+
 }

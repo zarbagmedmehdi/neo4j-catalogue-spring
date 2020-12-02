@@ -20,4 +20,9 @@ public class MagasinService {
     public MagasinService(MagasinRepository magasinRepository) {
         this.magasinRepository = magasinRepository;
     }
+
+//Mehdi work
+    public Iterable<Magasin> findAll(){
+        return magasinRepository.findAll();
+    }
 }
