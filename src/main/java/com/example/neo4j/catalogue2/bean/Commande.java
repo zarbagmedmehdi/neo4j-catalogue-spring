@@ -5,6 +5,8 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 @NodeEntity
@@ -16,7 +18,6 @@ public class Commande {
 
     @Relationship(type = "ORDERED_BY",direction = Relationship.INCOMING)
     private Client client;
-
     @Relationship(type = "CONTAINS")
     private List<CommandeItem> commandeItems;
 
