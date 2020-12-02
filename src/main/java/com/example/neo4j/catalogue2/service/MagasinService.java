@@ -5,6 +5,8 @@ import com.example.neo4j.catalogue2.dao.MagasinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MagasinService {
     @Autowired
@@ -19,5 +21,13 @@ public class MagasinService {
 
     public MagasinService(MagasinRepository magasinRepository) {
         this.magasinRepository = magasinRepository;
+    }
+
+    public List<Magasin> findAll() {
+        return (List<Magasin>) magasinRepository.findAll();
+    }
+
+    public void deleteById(Long id) {
+        magasinRepository.deleteById(id);
     }
 }

@@ -8,12 +8,16 @@ import com.example.neo4j.catalogue2.dao.ProduitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProduitService {
     @Autowired
     ProduitRepository produitRepository;
     @Autowired
     MagasinRepository magasinRepository;
+//    @Autowired
+//    CategorieRepository categorieRepository;
 
     public int save(Produit produit){
         if (produit!=null){
@@ -44,5 +48,9 @@ public class ProduitService {
             System.out.println(stockProduit);
         }
         return produit;
+    }
+
+    public List<Produit> findAll() {
+        return (List<Produit>) produitRepository.findAll();
     }
 }
