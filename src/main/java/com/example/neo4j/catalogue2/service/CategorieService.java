@@ -5,6 +5,8 @@ import com.example.neo4j.catalogue2.dao.CategorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategorieService {
     @Autowired
@@ -17,9 +19,7 @@ public class CategorieService {
         }
         return -1;
     }
-
-    //Mehdi Work
-    public Iterable<Categorie> findAll(){
-        return categorieRepository.findAll();
+    public List<Categorie> findAll() {
+        return (List<Categorie>) categorieRepository.findAll();
     }
 }

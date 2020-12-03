@@ -20,6 +20,10 @@ public class Review {
     public Review() {
     }
 
+    public Review(Long id) {
+        this.id = id;
+    }
+
     public Review(int stars, String comment, Client client) {
         this.stars = stars;
         this.comment = comment;

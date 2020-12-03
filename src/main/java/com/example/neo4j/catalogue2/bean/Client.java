@@ -1,10 +1,12 @@
 package com.example.neo4j.catalogue2.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import javax.swing.text.StyledEditorKit;
 import java.util.List;
 
 @NodeEntity
@@ -18,20 +20,51 @@ public class Client {
     private String password;
     private String numTel;
     private String adresse;
-
-    @Relationship(type = "ORDERED_BY")
+    private boolean isAdmin;
+    @JsonIgnore
+    @Relationship(type = "ORDERS")
     private List<Commande> commandes;
+
+    @Relationship(type= "WRITTEN_BY",direction = Relationship.INCOMING)
+    private Review  reviews;
 
     public Client() {
     }
 
-    public Client(String nom, String prenom, String email, String password, String numTel, String adresse) {
+    public Client(Long id) {
+        this.id = id;
+    }
+
+
+    public Client(String nom, String prenom, String email, String password, String numTel, String adresse, boolean cc) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.password = password;
         this.numTel = numTel;
         this.adresse = adresse;
+        this.isAdmin=cc;
+    }
+
+    public Client(String nom, String email, String password, boolean isAdmin) {
+        this.nom = nom;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
+    }
+    public Review getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Review reviews) {
+        this.reviews = reviews;
+    }
+    public boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public Long getId() {
@@ -108,6 +141,8 @@ public class Client {
                 ", password='" + password + '\'' +
                 ", numTel='" + numTel + '\'' +
                 ", adresse='" + adresse + '\'' +
+                ", isAdmin=" + isAdmin +
+                ", commandes=" + commandes +
                 '}';
     }
 }

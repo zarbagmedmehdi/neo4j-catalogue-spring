@@ -6,10 +6,10 @@ import com.example.neo4j.catalogue2.bean.SearchProduct;
 import com.example.neo4j.catalogue2.bean.StockProduit;
 import com.example.neo4j.catalogue2.dao.MagasinRepository;
 import com.example.neo4j.catalogue2.dao.ProduitRepository;
-import org.neo4j.driver.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,7 +18,10 @@ public class ProduitService {
     ProduitRepository produitRepository;
     @Autowired
     MagasinRepository magasinRepository;
-    private  Session session;
+
+    public List<Produit> findAll() {
+        return (List<Produit>) produitRepository.findAll();
+    }
 
     public int save(Produit produit){
         if (produit!=null){
@@ -34,8 +37,10 @@ public class ProduitService {
         produit=produitRepository.findById(produit.getId()).get();
 
         StockProduit stockProduit=new StockProduit(stock,magasin, produit);
-        magasin.getStockProduits().add(stockProduit);
-        produit.getStockProduits().add(stockProduit);
+        List<StockProduit> sp=new ArrayList<>();
+        sp.add(stockProduit);
+        magasin.setStockProduits(sp);
+        produit.setStockProduits(sp);
 
         magasinRepository.save(magasin);
         produitRepository.save(produit);
@@ -44,25 +49,17 @@ public class ProduitService {
 
     public Produit findById(Long id) {
         Produit produit=produitRepository.findById(id).get();
-        for (StockProduit stockProduit:produit.getStockProduits()
-             ) {
-            System.out.println(stockProduit);
-        }
+
         return produit;
     }
-     //Mehdi
-    public List<String> findAllMarques() {
-        return produitRepository.findAllMarques();
+    public List<String> findAllMarque(){
+       return produitRepository.findAllMarques();
     }
-    ///
     public Iterable<Produit> findByLibelle(String libelle) {
-        return produitRepository.findByLibelle(libelle);
+        return  produitRepository.findByReference(libelle);
     }
-    public Iterable<Produit> findAll() {
-        return produitRepository.findAll();
-    }
+    public Iterable<Produit> findByCriteria(SearchProduct s){
+        return  produitRepository.findCriteria(s.priceMin,s.priceMax,s.marques,s.categorie,s.magasinId);
 
-    public Iterable<Produit> fincCriteria(SearchProduct s){
-        return produitRepository.findCriteria(s.priceMin,s.priceMax,s.marques);
     }
 }

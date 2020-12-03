@@ -61,7 +61,6 @@ public class StockProduit {
                 "id=" + id +
                 ", stock=" + stock +
                 ", magasin=" + magasin +
-                ", produit=" + produit +
                 '}';
     }
 }

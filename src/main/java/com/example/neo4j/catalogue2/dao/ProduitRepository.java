@@ -13,19 +13,18 @@ import java.util.List;
 @Repository
 public interface ProduitRepository extends Neo4jRepository<Produit,Long>  {
     public static SearchProduct formData=new SearchProduct();
-    public Produit findByReference(String reference);
+    public Iterable<Produit> findByReference(String reference);
 
 
 
-    //Mehdi work
-    public Iterable<Produit>  findByLibelle(String libelle);
+
 
     @Query("MATCH (p :Produit) WHERE EXISTS(p.marque) RETURN DISTINCT p.marque AS marque LIMIT 25")
     public List<String> findAllMarques();
 
 
 
-    @Query("MATCH (p :Produit) WHERE "
+    @Query("MATCH (c:Categorie)<-[r:IN_CATEGORY]-(p:Produit)-[d:STOCKED_IN]->(m:Magasin) WHERE "
     +"  CASE WHEN NOT $pmin=0 "
     +"THEN p.prix> $pmin "
             +"ELSE TRUE "
@@ -37,11 +36,19 @@ public interface ProduitRepository extends Neo4jRepository<Produit,Long>  {
             +" CASE WHEN  $marques IS NOT  NULL "
             +" THEN p.marque IN $marques"
             +" ELSE TRUE "
+            +" END AND "
+            +" CASE WHEN  $categorie IS NOT  NULL "
+            +" THEN c.libelle=  $categorie"
+            +" ELSE TRUE "
+            +" END AND "
+            +" CASE WHEN NOT $magasin=0 "
+            +" THEN id(m)=$magasin"
+            +" ELSE TRUE "
             +" END"
             +" Return p"
             +""
             +""
     )
-    public Iterable<Produit> findCriteria( int pmin,int pmax,List<String> marques);
+    public Iterable<Produit> findCriteria( int pmin,int pmax,List<String> marques,String categorie,int magasin);
 
 }

@@ -4,6 +4,7 @@ import com.example.neo4j.catalogue2.bean.Magasin;
 import com.example.neo4j.catalogue2.dao.MagasinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class MagasinService {
@@ -21,8 +22,10 @@ public class MagasinService {
         this.magasinRepository = magasinRepository;
     }
 
-//Mehdi work
-    public Iterable<Magasin> findAll(){
-        return magasinRepository.findAll();
+    public List<Magasin> findAll() {
+        return (List<Magasin>) magasinRepository.findAll();
     }
-}
+
+    public void deleteById(Long id) {
+        magasinRepository.deleteById(id);
+    }}

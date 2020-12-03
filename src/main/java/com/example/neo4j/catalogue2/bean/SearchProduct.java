@@ -3,7 +3,7 @@ package com.example.neo4j.catalogue2.bean;
 import java.util.List;
 
 public class SearchProduct {
-    public String magasinId;
+    public int magasinId;
     public String categorie;
     public List<String> marques;
     public int priceMin;

@@ -27,6 +27,7 @@ public class Produit {
     private List<StockProduit> stockProduits = new ArrayList<>();
     @Relationship(type = "IN_CATEGORY")
     private List<Categorie> categories;
+    @JsonIgnore
     @Relationship(type = "CONTAINS", direction = Relationship.INCOMING)
     private List<CommandeItem> commandeItems;
     @Relationship(type = "HAS_REVIEW")
